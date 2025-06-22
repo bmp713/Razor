@@ -1,0 +1,59 @@
+﻿@page "/dashboard"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@using System.Text.Json
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Forms
+@using System.Net.Http.Json
+@using Frontend.Models
+
+<h3>Dashboard</h3>
+
+<div class="row justify-content-start align-items-center">
+    <div class="col-lg-6 col-12 text-left order-2">
+        <!-- <EditForm class="form" Model="user" OnValidSubmit="HandleUpdate">
+            <h4>Update Profile</h4>
+            <InputText @bind-Value="user.FirstName" placeholder="First Name" />
+            <InputText @bind-Value="user.LastName" placeholder="Last Name" />
+            <InputText @bind-Value="user.Email" placeholder="Email" />
+            <InputText @bind-Value="user.Password" placeholder="Password" />
+            <button type="submit">Update</button>
+        </EditForm> -->
+    </div>
+    <div class="col-lg-6 col-12 text-left order-1">
+        <form>
+            @if (users.Count > 0){
+                @foreach (var user in users){
+                    <hr />
+                    @user.id<br />
+                    @user.firstName @user.lastName<br />
+                    @user.email<br />
+                }
+            }
+        </form>
+    </div>
+</div>
+
+@code {
+    // Define the model for the update form
+    private List<User> users = new List<User>();
+    public User? user;        
+
+    protected override async Task OnInitializedAsync(){
+        users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
+    }
+
+    // Handle the form async for API
+    private async Task HandleUpdate(){
+    }
+
+    public class userUpdate
+    {
+        public int id { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+    }
+}

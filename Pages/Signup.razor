@@ -1,0 +1,67 @@
+﻿@page "/signup"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@using System.Text.Json
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Forms
+@using System.Net.Http.Json
+@using Frontend.Models
+
+<div class="row justify-content-start align-items-start">
+    <div class="col-lg-6 col-12 text-left">
+        <EditForm class="form" Model="signupFormModel" OnValidSubmit="@HandleSignup">
+            <h3>Sign Up</h3>
+            <InputText @bind-Value="signupFormModel.FirstName" placeholder="First Name" /><br>
+            <InputText @bind-Value="signupFormModel.LastName" placeholder="Last Name" /><br>
+            <InputText @bind-Value="signupFormModel.Email" placeholder="Email" /><br>
+            <InputText @bind-Value="signupFormModel.Password" placeholder="Password" type="password" /><br>
+            <button type="submit">Sign Up</button>
+        </EditForm>
+    </div>
+    <div class="col-lg-6 col-12 text-left">
+    </div>
+</div>
+
+@code{
+    // Store list of users
+    private List<User> users = new List<User>();
+    private SignupFormModel signupFormModel = new SignupFormModel();
+
+    protected override async Task OnInitializedAsync(){
+        users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users") ;
+    }
+
+    private async Task HandleSignup(){
+        Console.WriteLine(JsonSerializer.Serialize(signupFormModel));
+     
+        // GET the users list in one line:
+        var users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
+
+        // POST a new user (ignore the response body):
+        var newUser = new User{
+            id = new Random().Next(1000000000, int.MaxValue),
+            firstName = signupFormModel.FirstName,
+            lastName = signupFormModel.LastName,
+            email = signupFormModel.Email,
+            password = signupFormModel.Password
+        };
+        var res = await Http.PostAsJsonAsync("http://localhost:5127/users", newUser);
+
+        // PUT (update):
+        //await Http.PutAsJsonAsync("http://localhost:5127/users/123", updatedUser);
+        // DELETE a user:
+        //await Http.DeleteAsync("http://localhost:5127/users/123");
+     
+        NavigationManager.NavigateTo("/dashboard");
+    }
+
+    // Model class for the signup form
+    public class SignupFormModel{
+        public int id { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+    }
+}

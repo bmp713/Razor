@@ -1,0 +1,35 @@
+﻿@page "/login"
+@using System.Text.Json
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Forms
+@inject NavigationManager NavigationManager
+
+<div class="row justify-content-start align-items-center">
+    <div class="col-lg-6 col-12 text-left">
+        <EditForm class="form" Model="loginModel" OnValidSubmit="HandleLogin">
+            <h3>Login</h3>
+            <InputText @bind-Value="loginModel.Email" placeholder="Email" /><br>
+            <InputText @bind-Value="loginModel.Password" placeholder="Password" type="password" /><br>
+            <button type="submit">Login</button>
+        </EditForm>
+    </div>
+</div>
+
+@code{
+    private LoginModel loginModel = new LoginModel();
+    
+    // Handle form submission, async for API
+    private async Task HandleLogin() {
+    
+        // Send data to backend API
+        Console.WriteLine(JsonSerializer.Serialize(loginModel));
+        NavigationManager.NavigateTo("/dashboard");
+    }
+
+    // Model class for login form
+    public class LoginModel {
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+    }
+}
