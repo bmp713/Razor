@@ -1,6 +1,7 @@
 ﻿@page "/dashboard"
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
+@inject Frontend.Services.UserState UserState
 @using System.Text.Json
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
@@ -8,51 +9,125 @@
 @using System.Net.Http.Json
 @using Frontend.Models
 
-<h3>Dashboard</h3>
-
-<div class="row justify-content-start align-items-center">
-    <div class="col-lg-6 col-12 text-left order-2">
-        <!-- <EditForm class="form" Model="user" OnValidSubmit="HandleUpdate">
-            <h4>Update Profile</h4>
-            <InputText @bind-Value="user.FirstName" placeholder="First Name" />
-            <InputText @bind-Value="user.LastName" placeholder="Last Name" />
-            <InputText @bind-Value="user.Email" placeholder="Email" />
-            <InputText @bind-Value="user.Password" placeholder="Password" />
-            <button type="submit">Update</button>
-        </EditForm> -->
+<h2>Dashboard</h2>
+@if (!UserState.IsLoggedIn){
+    <div class="alert alert-warning">
+        You are not logged in. Please <a href="/login">login</a> to view your dashboard.
     </div>
-    <div class="col-lg-6 col-12 text-left order-1">
-        <form>
-            @if (users.Count > 0){
-                @foreach (var user in users){
-                    <hr />
-                    @user.id<br />
-                    @($"{user.firstName} {user.lastName}")<br />
-                    @user.email<br />
+}
+else{
+    <div class="row justify-content-start align-items-start">
+        <div class="col-lg-6 col-12 text-left order-1">
+            <h4>@($"{UserState.CurrentUser.firstName} {UserState.CurrentUser.lastName}")</h4>
+            <p>@UserState.CurrentUser.email</p>                    
+            <EditForm class="form" Model="updateModel" OnValidSubmit="HandleUpdate">
+                <h5>Update</h5>
+                <InputText @bind-Value="updateModel.FirstName" placeholder="First Name" /><br>
+                <InputText @bind-Value="updateModel.LastName" placeholder="Last Name" /><br>
+                <InputText @bind-Value="updateModel.Email" placeholder="Email" /><br> 
+                <InputText @bind-Value="updateModel.Password" placeholder="Password"/><br>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-primary" @onclick="HandleDelete">Delete</button>
+            </EditForm>
+        </div>
+        <div class="col-lg-6 col-12 text-left order-2">
+            <h4>All Users</h4>
+            <div class="list-group">
+                @if (users.Count > 0){
+                    @foreach (var user in users){
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>@($"{user.firstName} {user.lastName}")</strong>
+                                    <br />
+                                    <small>@user.email</small>
+                                </div>
+                                <small class="text-muted">ID: @user.id</small>
+                            </div>
+                        </div>
+                    }
                 }
-            }
-        </form>
+                else{
+                    <p>No users found</p>
+                }
+            </div>
+        </div>
     </div>
-</div>
+}
 
 @code {
     // Define the model for the update form
     private List<User> users = new List<User>();
+    private UpdateFormModel updateModel = new UpdateFormModel();
 
     protected override async Task OnInitializedAsync(){
-        users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
-    }
+        // Initialize user state if not already done
+        if (UserState.CurrentUser == null){
+            await UserState.Initialize();
+        }
 
-    // Handle the form async for API
+        // Only fetch users if logged in
+        if (UserState.IsLoggedIn){
+            users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
+            
+            // Initialize update model with current user data
+            updateModel.FirstName = UserState.CurrentUser.firstName;
+            updateModel.LastName = UserState.CurrentUser.lastName;
+        }
+        else{
+            // Redirect to login if not logged in
+            NavigationManager.NavigateTo("/login");
+        }
+    }    // Handle the form async for API
     private async Task HandleUpdate(){
+        if (UserState.CurrentUser != null){
+            // Update the user data with the form values
+            var updatedUser = new User{
+                id = UserState.CurrentUser.id,
+                firstName = updateModel.FirstName,
+                lastName = updateModel.LastName,
+                email = UserState.CurrentUser.email,
+                password = UserState.CurrentUser.password
+            };
+            
+            // Send PUT request to update user in backend
+            var response = await Http.PutAsJsonAsync($"http://localhost:5127/users/{updatedUser.id}", updatedUser);
+            
+            if (response.IsSuccessStatusCode){
+                // Update the UserState
+                await UserState.Login(updatedUser);
+                
+                // Reload the page to show updated user data
+                NavigationManager.NavigateTo("/dashboard", true);
+            }
+            else{
+                Console.WriteLine($"Failed to update user: {await response.Content.ReadAsStringAsync()}");
+            }
+        }
+    }
+  
+  // Handle delete
+    private async Task HandleDelete(){
+        if (UserState.CurrentUser != null){
+            // Call API to delete user
+            var response = await Http.DeleteAsync($"http://localhost:5127/users/{UserState.CurrentUser.id}");
+            
+            if (response.IsSuccessStatusCode){
+                // Clear UserState and redirect to login
+                await UserState.Logout();
+                NavigationManager.NavigateTo("/login");
+            }
+            else{
+                // Handle error (e.g., show message)
+                Console.WriteLine("Failed to delete user");
+            }
+        }
     }
 
-    public class userUpdate
-    {
-        public int id { get; set; }
+    public class UpdateFormModel{
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Email { get; set; }
-        public string? Password { get; set; }
+        public string? Password { get; set; }   
     }
 }

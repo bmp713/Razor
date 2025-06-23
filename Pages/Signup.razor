@@ -1,6 +1,7 @@
 ﻿@page "/signup"
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
+@inject Frontend.Services.UserState UserState
 @using System.Text.Json
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
@@ -16,10 +17,11 @@
             <InputText @bind-Value="signupFormModel.LastName" placeholder="Last Name" /><br>
             <InputText @bind-Value="signupFormModel.Email" placeholder="Email" /><br>
             <InputText @bind-Value="signupFormModel.Password" placeholder="Password" type="password" /><br>
-            <button type="submit">Sign Up</button>
+            <button type="submit" class="btn btn-primary mt-3">Sign Up</button>
         </EditForm>
-    </div>
-    <div class="col-lg-6 col-12 text-left">
+        <div class="mt-3">
+            Already have an account? <a href="/login">Login</a>
+        </div>
     </div>
 </div>
 
@@ -30,11 +32,18 @@
 
     // Load users from API
     protected override async Task OnInitializedAsync(){
+        // Check if already logged in
+        if (UserState.CurrentUser == null){
+            await UserState.Initialize();
+        }
+        if (UserState.IsLoggedIn){
+            NavigationManager.NavigateTo("/dashboard");
+        }
         users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
     }
 
     private async Task HandleSignup(){
-             
+                
         // POST a new user
         var newUser = new User{
             id = new Random().Next(1000000000, int.MaxValue),
@@ -43,19 +52,18 @@
             email = signupFormModel.Email,
             password = signupFormModel.Password
         };
-        var res = await Http.PostAsJsonAsync("http://localhost:5127/users", newUser);
-
-        // PUT (update):
-        //await Http.PutAsJsonAsync("http://localhost:5127/users/123", updatedUser);
-        // DELETE a user:
-        //await Http.DeleteAsync("http://localhost:5127/users/123");
-     
-        NavigationManager.NavigateTo("/dashboard");
+        
+        var response = await Http.PostAsJsonAsync("http://localhost:5127/users", newUser);
+        
+        if (response.IsSuccessStatusCode){
+            // Auto-login the new user
+            await UserState.Login(newUser);
+            NavigationManager.NavigateTo("/dashboard");
+        }
     }
     
     // Model class for the signup form
     public class SignupFormModel{
-        public int id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Email { get; set; }

@@ -1,44 +1,89 @@
-﻿@page "/login"
+﻿@page "/"
+@page "/login"
 @using System.Text.Json
+@using System.Net.Http.Json
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.Forms
+@using Frontend.Models
+@using Frontend.Services
 @inject NavigationManager NavigationManager
+@inject HttpClient Http
+@inject UserState UserState
 
 <div class="row justify-content-start align-items-center">
     <div class="col-lg-6 col-12 text-left">
-        <EditForm class="form" Model="loginModel" OnValidSubmit="HandleLogin">
-            <h3>Login</h3>
-            <InputText @bind-Value="loginModel.Email" placeholder="Email" /><br>
-            <InputText @bind-Value="loginModel.Password" placeholder="Password" type="password" /><br>
-            <button type="submit">Login</button>
-        </EditForm>
+        @if (UserState.IsLoggedIn){
+            <div class="alert alert-info">
+                You are already logged in as @UserState.CurrentUser.email.
+                <div class="mt-3">
+                    <a href="/dashboard" class="btn btn-primary">Go to Dashboard</a>
+                </div>
+            </div>
+        }
+        else{
+            <EditForm class="form" Model="loginModel" OnValidSubmit="HandleLogin">
+                <h3>Login</h3>
+                @if (!string.IsNullOrEmpty(loginError)){
+                    <div class="alert alert-danger">
+                        @loginError
+                    </div>
+                }
+                <InputText @bind-Value="loginModel.Email" placeholder="Email" class="form-control mb-2" /><br>
+                <InputText @bind-Value="loginModel.Password" placeholder="Password" type="password" class="form-control mb-2" /><br>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </EditForm>
+            <div class="mt-3">
+                Don't have an account? <a href="/signup">Sign up</a>
+            </div>
+        }
     </div>
 </div>
 
 @code{
     private LoginModel loginModel = new LoginModel();
-    
-    // Handle form submission, async for API
-    private async Task HandleLogin() {
-    
-        // Send data to backend API
-        //var response = await Http.PostAsJsonAsync("http://localhost:5127/login", loginModel);
+    private string? loginError;
+      protected override async Task OnInitializedAsync(){
+        // Check if user is already logged in
+        if (UserState.CurrentUser == null){
+            await UserState.Initialize();
+        }
         
-        //if (response.IsSuccessStatusCode){
-            //var user = await response.Content.ReadFromJsonAsync<User>();
-
-            // Store in browser's sessionStorage
-            //await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", JsonSerializer.Serialize(user));
+        // Redirect to dashboard if already logged in
+        if (UserState.IsLoggedIn){
             NavigationManager.NavigateTo("/dashboard");
-        //}
-        NavigationManager.NavigateTo("/dashboard");
-
-        // Console.WriteLine(JsonSerializer.Serialize(loginModel));
+        }
+    }
+      
+    // Handle form submission, async for API
+    private async Task HandleLogin(){
+        try{
+            // Get users from backend
+            var users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
+            
+            // Find matching user by email and password
+            var user = users?.FirstOrDefault(u => 
+                u.email == loginModel.Email && 
+                u.password == loginModel.Password);
+                
+            if (user != null){
+                // Store user in UserState (and localStorage)
+                await UserState.Login(user);
+                NavigationManager.NavigateTo("/dashboard");
+            } 
+            else{
+                // Show error
+                loginError = "Invalid email or password";
+            }
+        }
+        catch (Exception ex){
+            loginError = $"Login error: {ex.Message}";
+            Console.WriteLine(ex);
+        }
     }
 
     // Model class for login form
-    public class LoginModel {
+    public class LoginModel{
         public string? Email { get; set; }
         public string? Password { get; set; }
     }
