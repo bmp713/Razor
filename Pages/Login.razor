@@ -23,8 +23,18 @@
     private async Task HandleLogin() {
     
         // Send data to backend API
-        Console.WriteLine(JsonSerializer.Serialize(loginModel));
+        //var response = await Http.PostAsJsonAsync("http://localhost:5127/login", loginModel);
+        
+        //if (response.IsSuccessStatusCode){
+            //var user = await response.Content.ReadFromJsonAsync<User>();
+
+            // Store in browser's sessionStorage
+            //await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", JsonSerializer.Serialize(user));
+            NavigationManager.NavigateTo("/dashboard");
+        //}
         NavigationManager.NavigateTo("/dashboard");
+
+        // Console.WriteLine(JsonSerializer.Serialize(loginModel));
     }
 
     // Model class for login form
