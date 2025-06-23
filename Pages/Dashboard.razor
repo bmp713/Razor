@@ -27,7 +27,7 @@
                 @foreach (var user in users){
                     <hr />
                     @user.id<br />
-                    @user.firstName @user.lastName<br />
+                    @($"{user.firstName} {user.lastName}")<br />
                     @user.email<br />
                 }
             }
@@ -38,7 +38,6 @@
 @code {
     // Define the model for the update form
     private List<User> users = new List<User>();
-    public User? user;        
 
     protected override async Task OnInitializedAsync(){
         users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");

@@ -28,17 +28,14 @@
     private List<User> users = new List<User>();
     private SignupFormModel signupFormModel = new SignupFormModel();
 
+    // Load users from API
     protected override async Task OnInitializedAsync(){
-        users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users") ;
+        users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
     }
 
     private async Task HandleSignup(){
-        Console.WriteLine(JsonSerializer.Serialize(signupFormModel));
-     
-        // GET the users list in one line:
-        var users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
-
-        // POST a new user (ignore the response body):
+             
+        // POST a new user
         var newUser = new User{
             id = new Random().Next(1000000000, int.MaxValue),
             firstName = signupFormModel.FirstName,
@@ -55,7 +52,7 @@
      
         NavigationManager.NavigateTo("/dashboard");
     }
-
+    
     // Model class for the signup form
     public class SignupFormModel{
         public int id { get; set; }

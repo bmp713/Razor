@@ -615,6 +615,7 @@ C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net8.0\Web.Assem
 C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net8.0\Web.AssemblyInfo.cs
 C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net8.0\Web.csproj.CoreCompileInputs.cache
 C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net8.0\Web.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net8.0\Web.sourcelink.json
 C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net8.0\webcil\Microsoft.AspNetCore.Authorization.wasm
 C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net8.0\webcil\Microsoft.AspNetCore.Components.wasm
 C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net8.0\webcil\Microsoft.AspNetCore.Components.Forms.wasm
