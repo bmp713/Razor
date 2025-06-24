@@ -25,7 +25,6 @@ else{
                 <h5>Update</h5>
                 <InputText @bind-Value="updateModel.FirstName" placeholder="First Name" /><br>
                 <InputText @bind-Value="updateModel.LastName" placeholder="Last Name" /><br>
-                <InputText @bind-Value="updateModel.Email" placeholder="Email" /><br> 
                 <InputText @bind-Value="updateModel.Password" placeholder="Password"/><br>
                 <button type="submit" class="btn btn-primary">Update</button>
                 <button type="button" class="btn btn-primary" @onclick="HandleDelete">Delete</button>
@@ -48,16 +47,13 @@ else{
                         </div>
                     }
                 }
-                else{
-                    <p>No users found</p>
-                }
             </div>
         </div>
     </div>
     <div class="row justify-content-start align-items-start my-5">
         <h2>News</h2><hr>
         <h6>Latest articles from the New York Times</h6><br>
-        @if (articles != null || articles.Count > 0){ 
+        <!-- @if (articles != null || articles.Count > 0){ 
             @foreach (var article in articles.Take(3)){
                 <div class="col-xl-3 col-12 mb-3" 
                     style="
@@ -75,7 +71,7 @@ else{
                     </a>
                 </div>
             }
-        }
+        } -->
     </div>
 }
 
@@ -98,6 +94,8 @@ else{
             // Initialize update model with current user data
             updateModel.FirstName = UserState.CurrentUser.firstName;
             updateModel.LastName = UserState.CurrentUser.lastName;
+            updateModel.Email = UserState.CurrentUser.email;
+            updateModel.Password = UserState.CurrentUser.password;
         }
         else{
             // Redirect to login if not logged in
@@ -116,7 +114,6 @@ else{
 
     }    
     
-    
     // Handle the form async for API
     private async Task HandleUpdate(){
         if (UserState.CurrentUser != null){
@@ -125,19 +122,21 @@ else{
                 id = UserState.CurrentUser.id,
                 firstName = updateModel.FirstName,
                 lastName = updateModel.LastName,
-                email = UserState.CurrentUser.email,
-                password = UserState.CurrentUser.password
+                email = updateModel.Email,
+                password = updateModel.Password
             };
             
             // Send PUT request to update user in backend
             var response = await Http.PutAsJsonAsync($"http://localhost:5127/users/{updatedUser.id}", updatedUser);
             
             if (response.IsSuccessStatusCode){
-                // Update the UserState
-                await UserState.Login(updatedUser);
-                
-                // Reload the page to show updated user data
-                NavigationManager.NavigateTo("/dashboard", true);
+
+                // Get the updated user from backend
+                var refreshedUser = await Http.GetFromJsonAsync<User>($"http://localhost:5127/users/{updatedUser.id}");
+                UserState.CurrentUser = refreshedUser;
+
+                // Update the users list
+                users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
             }
             else{
                 Console.WriteLine($"Failed to update user: {await response.Content.ReadAsStringAsync()}");

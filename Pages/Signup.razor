@@ -13,6 +13,9 @@
     <div class="col-lg-6 col-12 text-left">
         <EditForm class="form" Model="signupFormModel" OnValidSubmit="@HandleSignup">
             <h3>Sign Up</h3>
+            @if (!string.IsNullOrEmpty(signupError)){
+                <div class="alert alert-danger">@signupError</div>
+            }
             <InputText @bind-Value="signupFormModel.FirstName" placeholder="First Name" /><br>
             <InputText @bind-Value="signupFormModel.LastName" placeholder="Last Name" /><br>
             <InputText @bind-Value="signupFormModel.Email" placeholder="Email" /><br>
@@ -29,6 +32,7 @@
     // Store list of users
     private List<User> users = new List<User>();
     private SignupFormModel signupFormModel = new SignupFormModel();
+    private string signupError = null;
 
     // Load users from API
     protected override async Task OnInitializedAsync(){
@@ -43,7 +47,7 @@
     }
 
     private async Task HandleSignup(){
-                
+
         // POST a new user
         var newUser = new User{
             id = new Random().Next(1000000000, int.MaxValue),
@@ -56,9 +60,10 @@
         var response = await Http.PostAsJsonAsync("http://localhost:5127/users", newUser);
         
         if (response.IsSuccessStatusCode){
-            // Auto-login the new user
             await UserState.Login(newUser);
             NavigationManager.NavigateTo("/dashboard");
+        } else {
+            signupError = $"Signup failed: {await response.Content.ReadAsStringAsync()}";
         }
     }
     

@@ -1,6 +1,7 @@
 ﻿@using Frontend.Services
 @inject UserState UserState
 @inject NavigationManager NavigationManager
+@implements IDisposable
 
 <div class="top-row ps-3 navbar navbar-dark">    <div class="container-fluid">
         <a class="navbar-brand" href="@(UserState.IsLoggedIn ? "dashboard" : "login")">User Management</a>
@@ -46,12 +47,17 @@
 
     private void ToggleNavMenu(){
         collapseNavMenu = !collapseNavMenu;
-    }    protected override async Task OnInitializedAsync(){
+    }
+    protected override async Task OnInitializedAsync(){
         if (UserState.CurrentUser == null){
             await UserState.Initialize();
         }
+        UserState.OnChange += StateHasChanged;
     }
-      private async Task HandleLogout(){
+    public void Dispose(){
+        UserState.OnChange -= StateHasChanged;
+    }
+    private async Task HandleLogout(){
         await UserState.Logout();
         NavigationManager.NavigateTo("/login", true);
     }

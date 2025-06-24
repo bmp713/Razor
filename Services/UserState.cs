@@ -10,6 +10,10 @@ namespace Frontend.Services {
         // locallStorage access via JS
         private readonly IJSRuntime _js;
         public UserState(IJSRuntime js){_js = js;}
+
+        // Event for state change
+        public event Action? OnChange;
+        private void NotifyStateChanged() => OnChange?.Invoke();
         
         // Load user on startup
         public async Task Initialize() {
@@ -22,12 +26,14 @@ namespace Frontend.Services {
         public async Task Login(User user) {
             CurrentUser = user;
             await _js.InvokeVoidAsync("localStorage.setItem", "user", JsonSerializer.Serialize(user));
+            NotifyStateChanged();
         }
         
         // Clear on logout
         public async Task Logout() {
             CurrentUser = null;
             await _js.InvokeVoidAsync("localStorage.removeItem", "user");
+            NotifyStateChanged();
         }
 
         // Check if user is logged in
