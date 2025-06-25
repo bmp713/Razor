@@ -23,6 +23,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 0.25rem;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    background: #fff;
 }
 
 .news {
@@ -30,6 +31,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 0.25rem;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    background: #fff;
 }
 
 .article {

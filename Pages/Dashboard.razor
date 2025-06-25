@@ -16,7 +16,7 @@
     </div>
 }
 else{
-    <div class="row update justify-content-start align-items-start mb-3">
+    <div class="row update justify-content-start align-items-start m-3">
         <div class="col-lg-6 col-12 text-left order-1">
             <h2>@($"{UserState.CurrentUser.firstName} {UserState.CurrentUser.lastName}")</h2>
             <p>@UserState.CurrentUser.email</p>                    
@@ -49,7 +49,7 @@ else{
             </div>
         </div>
     </div>
-    <div class="row news justify-content-start align-items-start align-items-stretch mb-5">
+    <div class="row news justify-content-start align-items-stretch m-3">
         <h2>News</h2>
         <h6>Latest articles from the New York Times</h6><br><br>
         @if (articles != null && articles.Count > 0){ 
@@ -62,8 +62,8 @@ else{
                                 height="150" class="mb-3"
                                 src="@article["img"]?.ToString()"
                             /><br>
-                            <strong>@article["name"]?.ToString()</strong><br><br>
-                            <small>@article["description"]?.ToString()</small>
+                            <strong>@article["name"]?.ToString()</strong><br>
+                            <p class="mt-2">@article["description"]?.ToString()</p>
                         </a>
                     </div>
                 </div>
