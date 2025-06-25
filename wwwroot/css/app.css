@@ -22,7 +22,7 @@ body {
     padding: 1.5rem;
     border: 1px solid #ddd;
     border-radius: 0.25rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 10px #0002;
     background: #fff;
 }
 
@@ -30,14 +30,14 @@ body {
     padding: 1.5rem;
     border: 1px solid #ddd;
     border-radius: 0.25rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 10px #0002;
     background: #fff;
 }
 
 .article {
     border: 1px solid #ddd;
     border-radius: 0.25rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 10px #0002;
 }
 
 h1:focus {

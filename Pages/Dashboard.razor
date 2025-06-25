@@ -16,7 +16,7 @@
     </div>
 }
 else{
-    <div class="row update justify-content-start align-items-start m-3">
+    <div class="row update justify-content-start align-items-start mx-1">
         <div class="col-lg-6 col-12 text-left order-1">
             <h2>@($"{UserState.CurrentUser.firstName} {UserState.CurrentUser.lastName}")</h2>
             <p>@UserState.CurrentUser.email</p>                    
@@ -49,13 +49,46 @@ else{
             </div>
         </div>
     </div>
-    <div class="row news justify-content-start align-items-stretch m-3">
+
+    <div class="row messages justify-content-start align-items-stretch mt-4">
+        @if (messages != null && messages.Count > 0){ 
+            @foreach (var message in messages.Take(numArticles)){
+                <div class="d-flex col-xl-3 col-12 mb-3 align-items-stretch">
+                    <div class="article p-4">
+                        <a target="_blank" href="@message["imageURL"]?.ToString()" 
+                            style="text-decoration: none; color: black;">
+                            <img
+                                width="10%" class="mb-3"
+                                src="@message["userImg"]?.ToString()"
+                            />
+                            <strong>@message["first"]?.ToString() @message["last"]?.ToString()</strong>
+                            <span class="mt-2">@message["time"]?.ToString()</span>
+                            <img
+                                width="100%" class="mb-1"
+                                src="@message["imageURL"]?.ToString()"
+                            />
+                            <p class="mt-2">@message["message"]?.ToString()</p>
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+        @if (articles != null && numArticles < articles.Count) {
+            <div class="col-12 text-left">
+                <button style="border-radius: 3px" class="btn btn-primary" @onclick="ShowMoreArticles">
+                    Show More
+                </button>
+            </div>
+        }
+    </div>
+
+    <div class="d-none row news justify-content-start align-items-stretch m-xl-3 m-1">
         <h2>News</h2>
         <h6>Latest articles from the New York Times</h6><br><br>
         @if (articles != null && articles.Count > 0){ 
             @foreach (var article in articles.Take(numArticles)){
                 <div class="d-flex col-xl-3 col-12 mb-3">
-                    <div class="article p-3">
+                    <div class="article p-4">
                         <a target="_blank" href="@article["url"]?.ToString()" 
                             style="text-decoration: none; color: black;">
                             <img
@@ -85,6 +118,7 @@ else{
     private UpdateFormModel updateModel = new UpdateFormModel();
     private int numArticles = 4;
     public JsonArray articles;
+    public JsonArray messages;
 
     protected override async Task OnInitializedAsync(){
         // Initialize user state if not already done
@@ -108,15 +142,18 @@ else{
         }
     
         Console.WriteLine("Dashboard initialized");
-        var json = await Http.GetStringAsync("https://react-api.up.railway.app/read");
+
+        var json = await Http.GetStringAsync("https://react-social-backend.up.railway.app/messages/read");
+        messages = JsonNode.Parse(json).AsArray();
+
+        json = await Http.GetStringAsync("https://react-api.up.railway.app/read");
         articles = JsonNode.Parse(json).AsArray();
-    
-        /*foreach (var article in articles){
-            foreach (var prop in article.AsObject()){
+        
+        foreach (var message in messages){
+            foreach (var prop in message.AsObject()){
                 Console.WriteLine($"{prop.Key}: {prop.Value}");
             }
-        }*/
-
+        }
     }    
     
     // Handle the form async for API
@@ -169,7 +206,7 @@ else{
 
     private void ShowMoreArticles(){
         if (articles != null && numArticles < articles.Count){
-            numArticles = Math.Min(numArticles + 2, articles.Count);
+            numArticles = Math.Min(numArticles + 4, articles.Count);
         }
     }
 
