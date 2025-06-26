@@ -30,44 +30,54 @@ body {
     color: #fff;
 }
 
+
 .update {
-    padding: 25px !important;
+    padding: 30px !important;
     border-radius: 7px;
     border: none;
     background: #ffff;
-    border: 1px solid #0002;
+    border: 1px solid #5552;
     box-shadow:
-        inset 5px 5px 10px #fff5,
-        inset -5px -5px 10px #0002,
-        5px 5px 20px #0003;
+        inset 5px 5px 10px #0001,
+        inset -5px -5px 10px #0003,
+        5px 5px 20px #0002;
     box-shadow:
         inset -1px -1px 5px #0001,
-        1px 1px 5px #0003;
+        1px 1px 10px #0002;
 }
 
 .update * {
     color: #000f;
 }
 
-/* 
-.update,
+/* .update,
 .users {
-    margin: 5px 0;
-    padding: 35px !important;
-    border-radius: 25px;
-    background: #000f;
-    background: linear-gradient(45deg, #000f, #000c, #000f, #000f);
-    background: linear-gradient(45deg, rgba(0, 0, 0, 0.867), rgb(8, 41, 134), #000f);
-    background: linear-gradient(45deg, #000f, #000c, #000f, #000c, #000f);
+    margin: 0px 0;
+    padding: 50px !important;
+    border-radius: 35px;
+    background: linear-gradient(45deg, #000f, rgba(64, 65, 78, 0.8), #000f, rgba(55, 55, 65, 0.8), #000f);
     box-shadow:
-        inset 10px 10px 10px #fff5,
+        inset 10px 10px 10px #fff2,
         inset -10px -10px 10px #0007,
         5px 5px 20px #0007;
 }
 
+.list-group-item {
+    color: #fff;
+    border-radius: 10px;
+    background: #0000;
+    border: 1px solid #fff2;
+}
+
+body {
+    background: #000e;
+}
+
 .update * {
-    color: #fffc;
+    color: #fffe;
 } */
+
+
 
 h1:focus {
     outline: none;

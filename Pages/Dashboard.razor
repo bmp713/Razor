@@ -18,10 +18,10 @@
 else{
     <div class="mx-0 my-3">
         <div class="row update justify-content-center align-items-stretch m-0">
-            <div class="col-lg-6 col-12 text-left order-1">
+            <div class="col-lg-6 col-12 text-left order-1 p-0">
                 <h2>@($"{UserState.CurrentUser.firstName} {UserState.CurrentUser.lastName}")</h2>
                 <p>@UserState.CurrentUser.email</p>                    
-                <EditForm class="form users" Model="updateModel" OnValidSubmit="HandleUpdate">
+                <EditForm class="form" Model="updateModel" OnValidSubmit="HandleUpdate">
                     <h5>Update</h5>
                     <InputText @bind-Value="updateModel.FirstName" placeholder="First Name" /><br>
                     <InputText @bind-Value="updateModel.LastName" placeholder="Last Name" /><br>
@@ -35,7 +35,7 @@ else{
                     <h2>All Users</h2>
                     @if (users.Count > 0){
                         @foreach (var user in users){
-                            <div class="users list-group-item">
+                            <div class="list-group-item">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="user-info p-2">
                                         <strong>@($"{user.firstName} {user.lastName}")</strong>
