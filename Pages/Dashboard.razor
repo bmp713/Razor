@@ -17,99 +17,70 @@
 }
 else{
     <div class="mx-0 my-3">
-    <div class="row update justify-content-center align-items-stretch m-0">
-        <div class="col-lg-6 col-12 text-left order-1">
-            <h2>@($"{UserState.CurrentUser.firstName} {UserState.CurrentUser.lastName}")</h2>
-            <p>@UserState.CurrentUser.email</p>                    
-            <EditForm class="form" Model="updateModel" OnValidSubmit="HandleUpdate">
-                <h5>Update</h5>
-                <InputText @bind-Value="updateModel.FirstName" placeholder="First Name" /><br>
-                <InputText @bind-Value="updateModel.LastName" placeholder="Last Name" /><br>
-                <InputText @bind-Value="updateModel.Password" placeholder="Password"/><br>
-                <button type="submit" class="btn btn-primary">Update</button>
-                <button type="button" class="btn btn-primary" @onclick="HandleDelete">Delete</button>
-            </EditForm>
-        </div>
-        <div class="col-lg-6 col-12 text-left order-2">
-            <div class="list-group mt-xl-0 mt-xl-0 mt-3">
-                <h2>All Users</h2>
-                @if (users.Count > 0){
-                    @foreach (var user in users){
-                        <div class="list-group-item">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="user-info p-2">
-                                    <strong>@($"{user.firstName} {user.lastName}")</strong>
-                                    <br />
-                                    <small>@user.email</small>
+        <div class="row update justify-content-center align-items-stretch m-0">
+            <div class="col-lg-6 col-12 text-left order-1">
+                <h2>@($"{UserState.CurrentUser.firstName} {UserState.CurrentUser.lastName}")</h2>
+                <p>@UserState.CurrentUser.email</p>                    
+                <EditForm class="form users" Model="updateModel" OnValidSubmit="HandleUpdate">
+                    <h5>Update</h5>
+                    <InputText @bind-Value="updateModel.FirstName" placeholder="First Name" /><br>
+                    <InputText @bind-Value="updateModel.LastName" placeholder="Last Name" /><br>
+                    <InputText @bind-Value="updateModel.Password" placeholder="Password"/><br>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-primary bg-red" @onclick="HandleDelete">Delete</button>
+                </EditForm>
+            </div>
+            <div class="col-lg-6 col-12 text-left order-2">
+                <div class="list-group mt-xl-0 mt-xl-0 mt-3">
+                    <h2>All Users</h2>
+                    @if (users.Count > 0){
+                        @foreach (var user in users){
+                            <div class="users list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user-info p-2">
+                                        <strong>@($"{user.firstName} {user.lastName}")</strong>
+                                        <br />
+                                        <small>@user.email</small>
+                                    </div>
+                                    <small class="text-muted">ID: @user.id</small>
                                 </div>
-                                <small class="text-muted">ID: @user.id</small>
                             </div>
-                        </div>
+                        }
                     }
+                </div>
+            </div>
+        </div><br>
+        <div class="row messages justify-content-start align-items-stretch g-4">
+            @if (messages != null && messages.Count > 0){ 
+                @foreach (var message in messages.Take(numMessages)){
+                    <div class="d-flex col-xl-3 col-12 mb-3">
+                        <div class="update ">
+                            <a target="_blank" href="@message["imageURL"]?.ToString()" 
+                                style="text-decoration: none; color: black;">
+                                <img
+                                    width="10%" class="mb-3"
+                                    src="@message["userImg"]?.ToString()"
+                                />
+                                <strong>@message["first"]?.ToString() @message["last"]?.ToString()</strong>
+                                <span class="mt-2 text-gray">@message["time"]?.ToString()</span>
+                                <img
+                                    width="100%" class="mb-1"
+                                    src="@message["imageURL"]?.ToString()"
+                                />
+                                <p class="mt-2">@message["message"]?.ToString()</p>
+                            </a>
+                        </div>
+                    </div>
                 }
-            </div>
+            }
+            @if (messages != null && numMessages < messages.Count) {
+                <div class="col-12 text-left my-2">
+                    <button style="border-radius: 3px" class="btn btn-primary" @onclick="ShowMoreMessages">
+                        Show More
+                    </button>
+                </div>
+            }
         </div>
-    </div><br>
-    <div class="row messages justify-content-start align-items-stretch">
-        @if (messages != null && messages.Count > 0){ 
-            @foreach (var message in messages.Take(numArticles)){
-                <div class="d-flex col-xl-3 col-12 mb-3 justify-content-between align-items-stretch">
-                    <div class="article p-4">
-                        <a target="_blank" href="@message["imageURL"]?.ToString()" 
-                            style="text-decoration: none; color: black;">
-                            <img
-                                width="10%" class="mb-3"
-                                src="@message["userImg"]?.ToString()"
-                            />
-                            <strong>@message["first"]?.ToString() @message["last"]?.ToString()</strong>
-                            <span class="mt-2">@message["time"]?.ToString()</span>
-                            <img
-                                width="100%" class="mb-1"
-                                src="@message["imageURL"]?.ToString()"
-                            />
-                            <p class="mt-2">@message["message"]?.ToString()</p>
-                        </a>
-                    </div>
-                </div>
-            }
-        }
-        @if (articles != null && numArticles < articles.Count) {
-            <div class="col-12 text-left my-2">
-                <button style="border-radius: 3px" class="btn btn-primary" @onclick="ShowMoreArticles">
-                    Show More
-                </button>
-            </div>
-        }
-    </div>
-
-    <div class="d-none row news justify-content-start align-items-stretch m-xl-3 m-1">
-        <h2>News</h2>
-        <h6>Latest articles from the New York Times</h6><br><br>
-        @if (articles != null && articles.Count > 0){ 
-            @foreach (var article in articles.Take(numArticles)){
-                <div class="d-flex col-xl-3 col-12 mb-3">
-                    <div class="article p-4">
-                        <a target="_blank" href="@article["url"]?.ToString()" 
-                            style="text-decoration: none; color: black;">
-                            <img
-                                height="150" class="mb-3"
-                                src="@article["img"]?.ToString()"
-                            /><br>
-                            <strong>@article["name"]?.ToString()</strong><br>
-                            <p class="mt-2">@article["description"]?.ToString()</p>
-                        </a>
-                    </div>
-                </div>
-            }
-        }
-        @if (articles != null && numArticles < articles.Count) {
-            <div class="col-12 text-left">
-                <button style="border-radius: 3px" class="btn btn-primary" @onclick="ShowMoreArticles">
-                    Show More
-                </button>
-            </div>
-        }
-    </div>
     </div>
 }
 
@@ -117,8 +88,7 @@ else{
     // Define the model for the update form
     private List<User> users = new List<User>();
     private UpdateFormModel updateModel = new UpdateFormModel();
-    private int numArticles = 4;
-    public JsonArray articles;
+    private int numMessages = 4;
     public JsonArray messages;
 
     protected override async Task OnInitializedAsync(){
@@ -146,9 +116,6 @@ else{
 
         var json = await Http.GetStringAsync("https://react-social-backend.up.railway.app/messages/read");
         messages = JsonNode.Parse(json).AsArray();
-
-        json = await Http.GetStringAsync("https://react-api.up.railway.app/read");
-        articles = JsonNode.Parse(json).AsArray();
         
         foreach (var message in messages){
             foreach (var prop in message.AsObject()){
@@ -205,9 +172,9 @@ else{
         }
     }
 
-    private void ShowMoreArticles(){
-        if (articles != null && numArticles < articles.Count){
-            numArticles = Math.Min(numArticles + 4, articles.Count);
+    private async Task ShowMoreMessages(){
+        if (messages != null && numMessages < messages.Count){
+            numMessages = Math.Min(numMessages + 4, messages.Count);
         }
     }
 

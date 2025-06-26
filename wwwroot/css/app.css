@@ -26,31 +26,48 @@ body {
     padding: 0.5rem;
     margin-bottom: 0.5rem;
     background: #000f;
+    border: #0000 solid 1px;
     color: #fff;
 }
 
 .update {
-    padding: 1.5rem;
-    border: 1px solid #ddd;
-    border-radius: 0.25rem;
-    box-shadow: 5px 5px 20px #1112;
-    background: #fff;
-}
-
-.news {
-    padding: 1.5rem;
-    border: 1px solid #ddd;
-    border-radius: 0.25rem;
-    box-shadow: 5px 5px 20px #1112;
-    background: #fff;
-}
-
-.article {
-    border: 1px solid #ddd;
+    padding: 25px !important;
+    border-radius: 7px;
+    border: none;
     background: #ffff;
-    border-radius: 0.25rem;
-    box-shadow: 5px 5px 20px #1112;
+    border: 1px solid #0002;
+    box-shadow:
+        inset 5px 5px 10px #fff5,
+        inset -5px -5px 10px #0002,
+        5px 5px 20px #0003;
+    box-shadow:
+        inset -1px -1px 5px #0001,
+        1px 1px 5px #0003;
 }
+
+.update * {
+    color: #000f;
+}
+
+/* 
+.update,
+.users {
+    margin: 5px 0;
+    padding: 35px !important;
+    border-radius: 25px;
+    background: #000f;
+    background: linear-gradient(45deg, #000f, #000c, #000f, #000f);
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.867), rgb(8, 41, 134), #000f);
+    background: linear-gradient(45deg, #000f, #000c, #000f, #000c, #000f);
+    box-shadow:
+        inset 10px 10px 10px #fff5,
+        inset -10px -10px 10px #0007,
+        5px 5px 20px #0007;
+}
+
+.update * {
+    color: #fffc;
+} */
 
 h1:focus {
     outline: none;
