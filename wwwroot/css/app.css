@@ -55,6 +55,9 @@ body {
     background: #0001;
 }
 
+
+
+
 /*
 .top-row {
     background: #000a !important;
@@ -71,13 +74,12 @@ body {
     padding: 45px !important;
     border-radius: 30px;
     border: none;
+    background: linear-gradient(135deg, rgb(13, 12, 34), rgba(34, 79, 177, 0.8), rgb(13, 14, 15));
     background: linear-gradient(45deg, #000f, rgba(64, 65, 78, 0.8), #000f, rgba(55, 55, 65, 0.8), #000f);
     background: linear-gradient(45deg, #000f, rgba(64, 65, 78, 0.8), #000f, rgba(71, 71, 87, 0.8), #000f);
-    background: linear-gradient(135deg, rgb(13, 12, 34), rgba(34, 79, 177, 0.8), rgb(13, 14, 15));
-    box-shadow:
-        inset 10px 10px 10px #ddd1,
-        inset -10px -10px 10px #0007,
-        5px 5px 20px #0007;
+box-shadow: inset 10px 10px 10px #ddd1,
+inset -10px -10px 10px #0007,
+5px 5px 20px #0007;
 }
 
 .list-group-item {
@@ -87,16 +89,19 @@ body {
     border: 1px solid #fff2;
 }
 
+.btn-primary {
+    background: #fff0 !important;
+}
+
 body {
     background: #000e;
 }
 
 .update * {
     color: #fffe;
-} */
+}
 
-
-
+*/
 h1:focus {
     outline: none;
 }
@@ -107,11 +112,11 @@ a,
 }
 
 .btn-primary {
-    color: #555f;
+    color: #555c;
     padding: 0.5rem 3rem;
     background-color: #1b6ec2;
     background: #ffff;
-    border-color: #555f !important;
+    border-color: #5553 !important;
 }
 
 .btn:focus,
