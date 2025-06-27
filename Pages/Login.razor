@@ -59,8 +59,9 @@
     private async Task HandleLogin(){
         try{
             // Get users from backend
-            var users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
-            
+            var users = await Http.GetFromJsonAsync<List<User>>("https://razor-backend.up.railway.app/users");
+            //var users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
+
             // Find matching user by email and password
             var user = users?.FirstOrDefault(u => 
                 u.email == loginModel.Email && 

@@ -99,7 +99,8 @@ else{
 
         // Only fetch users if logged in
         if (UserState.IsLoggedIn){
-            users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
+            users = await Http.GetFromJsonAsync<List<User>>("https://razor-backend.up.railway.app/users");
+            //users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
             
             // Initialize update model with current user data
             updateModel.FirstName = UserState.CurrentUser.firstName;
@@ -137,16 +138,20 @@ else{
             };
             
             // Send PUT request to update user in backend
-            var response = await Http.PutAsJsonAsync($"http://localhost:5127/users/{updatedUser.id}", updatedUser);
+            var response = await Http.PutAsJsonAsync($"https://razor-backend.up.railway.app/users/{updatedUser.id}", updatedUser);
+            //var response = await Http.PutAsJsonAsync($"http://localhost:5127/users/{updatedUser.id}", updatedUser);
             
             if (response.IsSuccessStatusCode){
 
                 // Get the updated user from backend
-                var refreshedUser = await Http.GetFromJsonAsync<User>($"http://localhost:5127/users/{updatedUser.id}");
+                var refreshedUser = await Http.GetFromJsonAsync<User>($"https://razor-backend.up.railway.app/{updatedUser.id}");
+                //var refreshedUser = await Http.GetFromJsonAsync<User>($"http://localhost:5127/users/{updatedUser.id}");
+
                 UserState.CurrentUser = refreshedUser;
 
                 // Update the users list
-                users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
+                users = await Http.GetFromJsonAsync<List<User>>("https://razor-backend.up.railway.app/users");
+                //users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
             }
             else{
                 Console.WriteLine($"Failed to update user: {await response.Content.ReadAsStringAsync()}");
@@ -158,8 +163,9 @@ else{
     private async Task HandleDelete(){
         if (UserState.CurrentUser != null){
             // Call API to delete user
-            var response = await Http.DeleteAsync($"http://localhost:5127/users/{UserState.CurrentUser.id}");
-            
+            var response = await Http.DeleteAsync($"https://razor-backend.up.railway.app/users/{UserState.CurrentUser.id}");
+            //var response = await Http.DeleteAsync($"http://localhost:5127/users/{UserState.CurrentUser.id}");
+
             if (response.IsSuccessStatusCode){
                 // Clear UserState and redirect to login
                 await UserState.Logout();

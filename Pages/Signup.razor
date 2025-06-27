@@ -43,7 +43,8 @@
         if (UserState.IsLoggedIn){
             NavigationManager.NavigateTo("/dashboard");
         }
-        users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
+        users = await Http.GetFromJsonAsync<List<User>>("https://razor-backend.up.railway.app/users");
+        //users = await Http.GetFromJsonAsync<List<User>>("http://localhost:5127/users");
     }
 
     private async Task HandleSignup(){
@@ -56,9 +57,10 @@
             email = signupFormModel.Email,
             password = signupFormModel.Password
         };
-        
-        var response = await Http.PostAsJsonAsync("http://localhost:5127/users", newUser);
-        
+
+        var response = await Http.PostAsJsonAsync("https://razor-backend.up.railway.app/users", newUser);
+        //var response = await Http.PostAsJsonAsync("http://localhost:5127/users", newUser);
+
         if (response.IsSuccessStatusCode){
             await UserState.Login(newUser);
             NavigationManager.NavigateTo("/dashboard");
