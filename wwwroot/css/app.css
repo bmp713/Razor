@@ -31,33 +31,51 @@ body {
 }
 
 
-.update {
+.update,
+.users {
     padding: 30px !important;
-    border-radius: 7px;
+    border-radius: 15px;
     border: none;
     background: #ffff;
     border: 1px solid #5552;
     box-shadow:
-        inset 5px 5px 10px #0001,
+        inset 5px 5px 10px #0002,
         inset -5px -5px 10px #0003,
         5px 5px 20px #0002;
     box-shadow:
-        inset -1px -1px 5px #0001,
-        1px 1px 10px #0002;
+        inset -1px -1px 5px #0005,
+        1px 1px 20px #0002;
 }
 
 .update * {
     color: #000f;
 }
 
-/* .update,
+body {
+    background: #0001;
+}
+
+/*
+.top-row {
+    background: #000a !important;
+    border: #0007 !important;
+}
+
+.top-row * {
+    color: #fff !important;
+}
+
+.update,
 .users {
-    margin: 0px 0;
-    padding: 50px !important;
-    border-radius: 35px;
+    margin-top: 1rem 50px;
+    padding: 45px !important;
+    border-radius: 30px;
+    border: none;
     background: linear-gradient(45deg, #000f, rgba(64, 65, 78, 0.8), #000f, rgba(55, 55, 65, 0.8), #000f);
+    background: linear-gradient(45deg, #000f, rgba(64, 65, 78, 0.8), #000f, rgba(71, 71, 87, 0.8), #000f);
+    background: linear-gradient(135deg, rgb(13, 12, 34), rgba(34, 79, 177, 0.8), rgb(13, 14, 15));
     box-shadow:
-        inset 10px 10px 10px #fff2,
+        inset 10px 10px 10px #ddd1,
         inset -10px -10px 10px #0007,
         5px 5px 20px #0007;
 }
@@ -89,9 +107,11 @@ a,
 }
 
 .btn-primary {
-    color: #fff;
+    color: #555f;
+    padding: 0.5rem 3rem;
     background-color: #1b6ec2;
-    border-color: #1861ac;
+    background: #ffff;
+    border-color: #555f !important;
 }
 
 .btn:focus,
