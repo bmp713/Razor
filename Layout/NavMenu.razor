@@ -3,8 +3,11 @@
 @inject NavigationManager NavigationManager
 @implements IDisposable
 
-<div class="top-row ps-3 navbar navbar-dark">    <div class="container-fluid">
-        <a class="navbar-brand" href="@(UserState.IsLoggedIn ? "dashboard" : "login")">Microsoft</a>
+<div class="top-row ps-3 navbar navbar-dark">    
+    <div class="container-fluid">
+        <a class="navbar-brand" href="@(UserState.IsLoggedIn ? "dashboard" : "login")">
+            <div style="font-weight: bold;" class="text-right">Microsoft</div>
+        </a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
