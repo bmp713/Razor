@@ -15,7 +15,8 @@ This is the frontend of an application built with .NET and Blazor
 
 ## Features
 - User authentication (Login, Signup)
-- Dashboard page including importing posts from React Social Media App
+- Dashboard page including importing posts from React Social Media App 
+
 https://react-social-frontend.up.railway.app/
 
 ---
