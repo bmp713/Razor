@@ -62,21 +62,18 @@ body {
     box-shadow:
         inset -1px -1px 5px #0005,
         1px 1px 20px #0002;
-    /* 
-    padding: 50px !important;
+
     border-radius: 65px;
     box-shadow:
         inset 5px 5px 10px #0001,
         inset -5px -5px 10px #0005,
-        5px 5px 20px #0007; */
+        5px 5px 40px #0003;
 }
 
 
 
 
-
 input {
-    margin-top: px;
     padding: 12px 15px 10px 15px !important;
     border-radius: 5px;
     border: 1px solid #5552;
