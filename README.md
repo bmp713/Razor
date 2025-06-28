@@ -2,7 +2,7 @@
 
 https://razor.up.railway.app
 
-This is the frontend of an application built with Blazor
+This is the frontend of an application built with .NET and Blazor
 
 ## Structure
 - Razor components are in the `Pages/` and `Layout/` folders
