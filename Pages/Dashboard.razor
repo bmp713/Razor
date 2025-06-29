@@ -20,7 +20,8 @@ else{
         <div class="row update justify-content-center align-items-stretch m-0">
             <div class="col-lg-6 col-12 text-left order-1 p-0">
                 <h2>@($"{UserState.CurrentUser.firstName} {UserState.CurrentUser.lastName}")</h2>
-                <p>@UserState.CurrentUser.email</p>                    
+                <p>@UserState.CurrentUser.email</p>            
+                
                 <EditForm class="form" Model="updateModel" OnValidSubmit="HandleUpdate">
                     <h5>Update</h5>
                     <InputText @bind-Value="updateModel.FirstName" placeholder="First Name" /><br>
@@ -47,6 +48,7 @@ else{
                             </div>
                         }
                     }
+
                 </div>
             </div>
         </div><br>
@@ -75,12 +77,16 @@ else{
             }
             @if (messages != null && numMessages < messages.Count) {
                 <div class="col-12 text-left my-0 mx-0">
-                    <button style="border-radius: 3px" class="btn btn-primary" @onclick="ShowMoreMessages">
+                    <button style="background: none; color: #888;" class="btn btn-primary" @onclick="ShowMoreMessages">
                         Show More
+                    </button>
+                    <button class="" style="color:#888; border:none; background:none" @onclick="ToggleDark">
+                        @(isDark ? "Light" : "Dark") Theme
                     </button>
                 </div>
             }
         </div>
+
     </div>
 }
 
@@ -90,6 +96,13 @@ else{
     private UpdateFormModel updateModel = new UpdateFormModel();
     private int numMessages = 4;
     public JsonArray messages;
+
+    private bool isDark = false;
+    [Inject] IJSRuntime JS { get; set; } = default!;
+
+    private async Task ToggleDark(){
+        isDark = await JS.InvokeAsync<bool>("toggleDarkClass");
+    }
 
     protected override async Task OnInitializedAsync(){
         // Initialize user state if not already done

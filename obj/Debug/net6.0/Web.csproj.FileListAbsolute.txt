@@ -818,3 +818,4 @@ C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net6.0\Web.dll
 C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net6.0\refint\Web.dll
 C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net6.0\Web.pdb
 C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\obj\Debug\net6.0\ref\Web.dll
+C:\Users\Owner\Downloads\Apps\NET\Blazor\Web\Frontend\bin\Debug\net6.0\package.json

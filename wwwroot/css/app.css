@@ -2,7 +2,6 @@ html,
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.1;
-    /* background-image: linear-gradient(rgb(5, 39, 103) 0%, #080d35); */
 }
 
 .form {
@@ -30,56 +29,26 @@ body {
     color: #fff;
 }
 
-
-.update,
-.users {
-    padding: 30px !important;
-    border-radius: 15px;
-    border: none;
-    border: 1px solid #5552;
-    box-shadow:
-        inset 5px 5px 10px #0002,
-        inset -5px -5px 10px #0003,
-        5px 5px 20px #0002;
-    box-shadow:
-        inset -1px -1px 5px #0005,
-        1px 1px 20px #0002;
-}
-
-
-
-.update,
-.users {
-    padding: 40px !important;
-    border-radius: 20px;
-    border: none;
-    background: #ffff !important;
-
-    box-shadow:
-        inset 20px 20px 20px #dddd,
-        inset -20px -20px 20px #0007,
-        15px 15px 30px #0002;
-    box-shadow:
-        inset -1px -1px 5px #0005,
-        1px 1px 20px #0002;
-
-    border-radius: 65px;
-    box-shadow:
-        inset 5px 5px 10px #0001,
-        inset -5px -5px 10px #0005,
-        5px 5px 40px #0003;
-}
-
-
-
-
 input {
+    margin-top: px;
     padding: 12px 15px 10px 15px !important;
     border-radius: 5px;
     border: 1px solid #5552;
     box-shadow:
         inset 2px 2px 3px #0005,
         inset -2px -2px 3px #fff5;
+}
+
+.update,
+.users {
+    padding: 45px !important;
+    border-radius: 65px;
+    border: none;
+    background: #ffff;
+    box-shadow:
+        inset 5px 5px 10px #0001,
+        inset -5px -5px 10px #0005,
+        5px 5px 40px #0003;
 }
 
 .update * {
@@ -92,53 +61,56 @@ body {
 
 
 
-/* 
 
-.top-row {
+/* Dark Mode Styles */
+.update.dark,
+.users.dark {
+    box-shadow:
+        inset 5px 5px 10px #fff3,
+        inset -7px -7px 30px #000f,
+        1px 1px 20px #0002;
+    background: linear-gradient(rgb(13, 12, 34), rgba(34, 79, 177, 0.8), rgb(13, 14, 15));
+    background: linear-gradient(rgb(0, 0, 0), rgba(62, 63, 66, 0.8), rgb(0, 0, 0));
+    background: linear-gradient(rgb(17, 17, 17), rgba(62, 63, 66, 0.8), rgb(12, 12, 12));
+}
+
+body.dark {
+    background: #000e;
+}
+
+.update.dark * {
+    color: #fffe;
+}
+
+.top-row.dark {
     background: #000a !important;
     border: #0007 !important;
 }
 
-.top-row * {
+.top-row.dark * {
     color: #fff !important;
 }
 
-.update,
-.users {
-    margin-top: 1rem 50px;
-    padding: 50px !important;
-    border-radius: 80px;
-    border: none;
-    background: linear-gradient(135deg, rgb(13, 12, 34), rgba(34, 79, 177, 0.8), rgb(13, 14, 15));
-    background: linear-gradient(45deg, #000f, rgba(64, 65, 78, 0.8), #000f, rgba(55, 55, 65, 0.8), #000f);
-    background: linear-gradient(45deg, #000f, rgba(64, 65, 78, 0.8), #000f, rgba(71, 71, 87, 0.8), #000f);
-    background: linear-gradient(45deg, #000f, rgba(51, 52, 63, 0.8), #000f, rgba(65, 65, 78, 0.8), #000f);
-    background: linear-gradient(0deg, #000f, rgba(51, 52, 63, 0.8), #000f, rgba(65, 65, 78, 0.8), #000f);
-    box-shadow: inset 10px 10px 10px #ddd1,
-        inset -10px -10px 10px #0007,
-        5px 5px 20px #0007;
-
-    background-size: 200% 200%;
-}
-
-.list-group-item {
+.list-group-item.dark {
     color: #fff;
     border-radius: 10px;
     background: #0000;
     border: 1px solid #fff2;
 }
 
-.btn-primary {
-    background: #fff0 !important;
+input.dark {
+    margin-top: px;
+    padding: 15px 15px 12px 15px !important;
+    border-radius: 5px;
+    border: 1px solid #5552;
+    box-shadow:
+        inset 2px 2px 3px #0005,
+        inset -2px -2px 3px #fff5;
+    background: linear-gradient(rgb(17, 17, 17), rgba(35, 35, 36, 0.8)) !important;
 }
 
-body {
-    background: #000e;
-}
 
-.update * {
-    color: #fffe;
-} */
+
 
 
 h1:focus {
