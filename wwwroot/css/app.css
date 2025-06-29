@@ -30,8 +30,7 @@ body {
 }
 
 input {
-    margin-top: px;
-    padding: 12px 15px 10px 15px !important;
+    padding: 11px 15px 11px 15px !important;
     border-radius: 5px;
     border: 1px solid #5552;
     box-shadow:
@@ -61,46 +60,49 @@ body {
 
 
 
-
 /* Dark Mode Styles */
-.update.dark,
-.users.dark {
-    box-shadow:
-        inset 5px 5px 10px #fff3,
-        inset -7px -7px 30px #000f,
-        1px 1px 20px #0002;
-    background: linear-gradient(rgb(13, 12, 34), rgba(34, 79, 177, 0.8), rgb(13, 14, 15));
-    background: linear-gradient(rgb(0, 0, 0), rgba(62, 63, 66, 0.8), rgb(0, 0, 0));
-    background: linear-gradient(rgb(17, 17, 17), rgba(62, 63, 66, 0.8), rgb(12, 12, 12));
-}
-
 body.dark {
     background: #000e;
 }
 
-.update.dark * {
+body.dark .update,
+body.dark .users {
+    box-shadow:
+        inset 5px 5px 10px #fff3,
+        inset -7px -7px 30px #000f,
+        1px 1px 20px #0002;
+    background: linear-gradient(rgb(0, 0, 0), rgba(62, 63, 66, 0.8), rgb(0, 0, 0));
+    background: linear-gradient(rgb(13, 12, 34), rgba(34, 79, 177, 0.8), rgb(13, 14, 15));
+    background: linear-gradient(rgb(17, 17, 17), rgba(62, 63, 66, 0.8), rgb(12, 12, 12));
+}
+
+body.dark .update * {
     color: #fffe;
 }
 
-.top-row.dark {
+body.dark .top-row {
     background: #000a !important;
     border: #0007 !important;
 }
 
-.top-row.dark * {
+body.dark .top-row * {
     color: #fff !important;
 }
 
-.list-group-item.dark {
+body.dark .list-group-item {
     color: #fff;
     border-radius: 10px;
     background: #0000;
     border: 1px solid #fff2;
 }
 
-input.dark {
+body.dark .btn-primary {
+    background: #fff1 !important;
+}
+
+body.dark input {
     margin-top: px;
-    padding: 15px 15px 12px 15px !important;
+    padding: 11px 15px 11px 15px !important;
     border-radius: 5px;
     border: 1px solid #5552;
     box-shadow:
@@ -108,7 +110,6 @@ input.dark {
         inset -2px -2px 3px #fff5;
     background: linear-gradient(rgb(17, 17, 17), rgba(35, 35, 36, 0.8)) !important;
 }
-
 
 
 
@@ -130,13 +131,6 @@ a,
     border-color: #9999 !important;
 }
 
-.btn:focus,
-.btn:active:focus,
-.btn-link.nav-link:focus,
-.form-control:focus,
-.form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
 
 .content {
     padding-top: 1.1rem;

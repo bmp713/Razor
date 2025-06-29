@@ -55,7 +55,7 @@ else{
         <div class="row messages justify-content-start align-items-stretch g-4">
             @if (messages != null && messages.Count > 0){ 
                 @foreach (var message in messages.Take(numMessages)){
-                    <div class="d-flex col-xl-3 col-12 mb-3">
+                    <div class="d-flex col-xl-3 col-12 mb-0">
                         <div class="update ">
                             <a target="_blank" href="@message["imageURL"]?.ToString()" 
                                 style="text-decoration: none; color: black;">
@@ -75,16 +75,18 @@ else{
                     </div>
                 }
             }
-            @if (messages != null && numMessages < messages.Count) {
-                <div class="col-12 text-left my-0 mx-0">
+            <div class="col-12 text-left my-3 mx-0">
+
+                @if (messages != null && numMessages < messages.Count) {
                     <button style="background: none; color: #888;" class="btn btn-primary" @onclick="ShowMoreMessages">
                         Show More
                     </button>
-                    <button class="" style="color:#888; border:none; background:none" @onclick="ToggleDark">
-                        @(isDark ? "Light" : "Dark") Theme
-                    </button>
-                </div>
-            }
+                }
+                <button style="color:#888; border:none !important; background:none" class="btn btn-primary" @onclick="ToggleDark">
+                    @(isDark ? "Light" : "Dark") Theme
+                </button>
+            </div>
+            
         </div>
 
     </div>
