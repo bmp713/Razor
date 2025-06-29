@@ -8,13 +8,13 @@
     </div>
 
     <main>
-        <div class="top-row px-4">
+        <div class="top-row px-3">
             @if (UserState.IsLoggedIn){
                 <span>Welcome, @UserState.CurrentUser.firstName</span>
             }
         </div>
 
-        <article class="content px-4">
+        <article class="content px-3">
             @Body
         </article>
     </main>
