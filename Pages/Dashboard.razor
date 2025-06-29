@@ -37,18 +37,17 @@ else{
                     @if (users.Count > 0){
                         @foreach (var user in users){
                             <div class="list-group-item">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="user-info p-2">
+                                <div class="d-flex flex-column flex-xl-row justify-content-xl-between align-items-start p-2">
+                                    <div class="user-info">
                                         <strong>@($"{user.firstName} {user.lastName}")</strong>
                                         <br />
                                         <small>@user.email</small>
                                     </div>
-                                    <small class="text-muted">ID: @user.id</small>
+                                    <small class="text-muted pt-2">ID: @user.id</small>
                                 </div>
                             </div>
                         }
                     }
-
                 </div>
             </div>
         </div><br>
