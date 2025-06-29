@@ -115,6 +115,7 @@ body.dark .btn-primary {
 
 body.dark .btn-primary:hover {
     background: #fff7;
+    background-color: #1b6ec2;
 }
 
 body.dark input {
