@@ -1,7 +1,7 @@
 {
   "entryAssembly": "Web",
   "resources": {
-    "hash": "sha256-4rX2Rm9jOqp/9Hgqtl14868xduPjE4881ujDyrOMJ5w=",
+    "hash": "sha256-fn9teaGjJDLDugkm9MIK/zYtociT4bZPhvmuOX0xehA=",
     "runtime": {
       "dotnet.6.0.36.q43lb43uml.js": "sha256-pu7MO47B6So4jcW6iY2UI11lBZYz2EQnJKiYNsOpNJg=",
       "dotnet.timezones.blat": "sha256-vrFYQt55a4tGoDGoyRfjjGa1nSecx646RK78iTzPWCM=",
@@ -200,10 +200,10 @@
       "mscorlib.dll": "sha256-FHccFgM8rcGOQ8oacA4eEgiiOynHayVKyd2ICq3Bo4w=",
       "netstandard.dll": "sha256-D91viTBgwuzeuIOx1KgBYnoY0hl2IpcBu/zr22Fu0BU=",
       "System.Private.CoreLib.dll": "sha256-5FbWgChEgLPlYByi8VsHTisbCpgMNSbf95JK5dVOs50=",
-      "Web.dll": "sha256-8kohnrDUO3MdLz6eXHC4BNsRtp5xzjR2rGi4U8YEvws="
+      "Web.dll": "sha256-tNIWpXAXJtjLLFtYpulaF++fM2Wv9HlsL3zE8pdAJHQ="
     },
     "pdb": {
-      "Web.pdb": "sha256-7LrxWzr7IBijwLhVjWos68jq63f7PgVWCapS4d/XCBg="
+      "Web.pdb": "sha256-GVD0BTpuB8+Ok4ddOS3Sc63YMFHt8CfMU/KD/Gua6qI="
     },
     "runtimeAssets": {
       "dotnet.wasm": {

@@ -80,6 +80,15 @@ body.dark .users {
     background: linear-gradient(rgb(17, 17, 17), rgba(62, 63, 66, 0.8), rgb(12, 12, 12));
 }
 
+@media (max-width: 768px) {
+
+    body.dark .update,
+    body.dark .users {
+        background: linear-gradient(90deg, rgb(17, 17, 17), rgba(62, 63, 66, 0.8), rgb(12, 12, 12));
+    }
+}
+
+
 body.dark .update * {
     color: #fffe;
 }
@@ -101,7 +110,11 @@ body.dark .list-group-item {
 }
 
 body.dark .btn-primary {
-    background: #fff0 !important;
+    background: #fff0;
+}
+
+body.dark .btn-primary:hover {
+    background: #fff7;
 }
 
 body.dark input {
