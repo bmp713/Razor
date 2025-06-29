@@ -101,7 +101,6 @@ body.dark .btn-primary {
 }
 
 body.dark input {
-    margin-top: px;
     padding: 11px 15px 11px 15px !important;
     border-radius: 5px;
     border: 1px solid #5552;
