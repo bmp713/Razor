@@ -66,6 +66,7 @@ input {
 
 body {
     background: #0001;
+
 }
 
 
@@ -73,6 +74,8 @@ body {
 /* Dark Mode Styles */
 body.dark {
     background: #000e;
+    background: linear-gradient(#000d, #000d), url('https://brandonmpiper.com/assets/images/1 (10).jpg');
+    background: linear-gradient(#000f, #000d, #000f);
 }
 
 body.dark .update,
