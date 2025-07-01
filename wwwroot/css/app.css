@@ -1,5 +1,6 @@
 html,
 body {
+    /* background: linear-gradient(#fffe, #fffe), url('https://brandonmpiper.com/assets/images/Business-bg2.jpg'); */
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.1;
 }
@@ -74,8 +75,10 @@ body {
 /* Dark Mode Styles */
 body.dark {
     background: #000e;
-    background: linear-gradient(#000d, #000d), url('https://brandonmpiper.com/assets/images/1 (10).jpg');
-    background: linear-gradient(#000f, #000d, #000f);
+    background: linear-gradient(#000b, #0009), url('https://brandonmpiper.com/assets/images/Business-bg2.jpg');
+    /* background: linear-gradient(#000f, #000d, #000f); */
+    /* background: linear-gradient(#000f, #000d, #000f); */
+    backdrop-filter: blur(8px);
 }
 
 body.dark .update,
