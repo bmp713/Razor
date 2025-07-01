@@ -75,7 +75,7 @@ body {
 /* Dark Mode Styles */
 body.dark {
     background: #000e;
-    background: linear-gradient(#000d, #00001ff0), url('https://brandonmpiper.com/assets/images/Business-bg2.jpg');
+    background: linear-gradient(#001d, #001d), url('https://brandonmpiper.com/assets/images/Business-bg2.jpg');
     /* background: linear-gradient(#000f, #000d, #000f); */
     /* background: linear-gradient(#000f, #000d, #000f); */
     backdrop-filter: blur(8px);

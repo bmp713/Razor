@@ -2,6 +2,7 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 @inject Frontend.Services.UserState UserState
+@inject IJSRuntime JSRuntime
 @using System.Text.Json
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
@@ -98,7 +99,7 @@ else{
     private int numMessages = 4;
     public JsonArray messages;
 
-    private bool isDark = false;
+    private bool isDark = true;
     [Inject] IJSRuntime JS { get; set; } = default!;
 
     private async Task ToggleDark(){
@@ -106,6 +107,11 @@ else{
     }
 
     protected override async Task OnInitializedAsync(){
+        // Turn on dark mode by default for dashboard
+        if (!isDark) {
+            await JS.InvokeAsync<bool>("toggleDarkClass");
+        }
+        
         // Initialize user state if not already done
         if (UserState.CurrentUser == null){
             await UserState.Initialize();
@@ -203,5 +209,13 @@ else{
         public string? LastName { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }   
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("toggleDarkClass");
+        }
     }
 }
