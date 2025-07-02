@@ -2,7 +2,6 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 @inject Frontend.Services.UserState UserState
-@inject IJSRuntime JSRuntime
 @using System.Text.Json
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
@@ -107,11 +106,9 @@ else{
     }
 
     protected override async Task OnInitializedAsync(){
-        // Turn on dark mode by default for dashboard
-        if (!isDark) {
-            await JS.InvokeAsync<bool>("toggleDarkClass");
-        }
-        
+        // Initialize dark mode
+        isDark = await JS.InvokeAsync<bool>("toggleDarkClass");
+
         // Initialize user state if not already done
         if (UserState.CurrentUser == null){
             await UserState.Initialize();
@@ -164,7 +161,7 @@ else{
             if (response.IsSuccessStatusCode){
 
                 // Get the updated user from backend
-                var refreshedUser = await Http.GetFromJsonAsync<User>($"https://razor-backend.up.railway.app/{updatedUser.id}");
+                var refreshedUser = await Http.GetFromJsonAsync<User>($"https://razor-backend.up.railway.app/users/{updatedUser.id}");
                 //var refreshedUser = await Http.GetFromJsonAsync<User>($"http://localhost:5127/users/{updatedUser.id}");
 
                 UserState.CurrentUser = refreshedUser;
@@ -209,13 +206,5 @@ else{
         public string? LastName { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }   
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync("toggleDarkClass");
-        }
     }
 }
