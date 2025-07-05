@@ -29,6 +29,22 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
+      "Id": "C:\\Users\\Owner\\Downloads\\Apps\\NET\\Blazor\\Web\\Frontend\\wwwroot\\js\\app.js",
+      "PackagePath": "staticwebassets\\js\\app.js"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Downloads\\Apps\\NET\\Blazor\\Web\\Frontend\\wwwroot\\js\\chart-simple.js",
+      "PackagePath": "staticwebassets\\js\\chart-simple.js"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Downloads\\Apps\\NET\\Blazor\\Web\\Frontend\\wwwroot\\js\\charts.js",
+      "PackagePath": "staticwebassets\\js\\charts.js"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Downloads\\Apps\\NET\\Blazor\\Web\\Frontend\\wwwroot\\js\\script.js",
+      "PackagePath": "staticwebassets\\js\\script.js"
+    },
+    {
       "Id": "C:\\Users\\Owner\\Downloads\\Apps\\NET\\Blazor\\Web\\Frontend\\wwwroot\\sample-data\\weather.json",
       "PackagePath": "staticwebassets\\sample-data\\weather.json"
     },

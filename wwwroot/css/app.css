@@ -41,7 +41,7 @@ input {
 
 .update,
 .users {
-    padding: 45px !important;
+    padding: 40px 50px !important;
     border-radius: 65px;
     border: none;
     background: #ffff;
@@ -240,4 +240,18 @@ a,
 
 code {
     color: #c02d76;
+}
+
+/* Bar Chart Styles */
+.bars-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    align-items: flex-end;
+}
+
+.bar {
+    width: 40px;
+    background-color: #232d85;
+    border-radius: 4px 4px 0 0;
 }

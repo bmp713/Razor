@@ -48,9 +48,26 @@ else{
                             </div>
                         }
                     }
+                                            <div class="list-group-item d-flex justify-content-between align-items-center p-2 px-4">
+                            <div class="bars">
+                                @foreach (var user in users){
+                                    <span class="bar" style="width:@(users.Count * 15)px"></span>
+                                }
+                            </div>
+                            <span>@users.Count Users</span>
+                        </div>
                 </div>
             </div>
         </div><br>
+        <style>
+        .bar {
+            padding: 5px 10px;
+            background-color:rgb(42, 61, 146);
+            border: 1px solid #fff3; 
+            border-radius: 0px;
+            display: inline-block;
+        }
+        </style>
         <div class="row messages justify-content-start align-items-stretch g-4">
             @if (messages != null && messages.Count > 0){ 
                 @foreach (var message in messages.Take(numMessages)){
@@ -75,7 +92,6 @@ else{
                 }
             }
             <div class="col-12 text-left my-3 mx-0">
-
                 @if (messages != null && numMessages < messages.Count) {
                     <button style="background: none; color: #888;" class="btn btn-primary" @onclick="ShowMoreMessages">
                         Show More
@@ -85,20 +101,28 @@ else{
                     @(isDark ? "Light" : "Dark") Theme
                 </button>
             </div>
-            
         </div>
-
     </div>
 }
-
+ 
 @code {
     // Define the model for the update form
     private List<User> users = new List<User>();
     private UpdateFormModel updateModel = new UpdateFormModel();
     private int numMessages = 4;
     public JsonArray messages;
-
     private bool isDark = true;
+
+    List<int> Data = new() { 70, 30, 10 };
+    protected override void OnInitialized(){
+        foreach (var value in Data){
+            Console.WriteLine(value);
+        }
+        base.OnInitialized();
+    }
+
+
+
     [Inject] IJSRuntime JS { get; set; } = default!;
 
     private async Task ToggleDark(){
@@ -137,7 +161,7 @@ else{
         
         foreach (var message in messages){
             foreach (var prop in message.AsObject()){
-                Console.WriteLine($"{prop.Key}: {prop.Value}");
+                <!-- Console.WriteLine($"{prop.Key}: {prop.Value}"); -->
             }
         }
     }    
