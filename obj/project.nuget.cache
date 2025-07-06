@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Xu7nBpd4zQQ=",
+  "dgSpecHash": "RLkOdmpJYHE=",
   "success": true,
   "projectFilePath": "C:\\Users\\Owner\\Downloads\\Apps\\NET\\Blazor\\Web\\Frontend\\Web.csproj",
   "expectedPackageFiles": [
@@ -36,10 +36,7 @@
     "C:\\Users\\Owner\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
-    "C:\\Users\\Owner\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.36\\microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
-    "C:\\Users\\Owner\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.36\\microsoft.netcore.app.runtime.mono.browser-wasm.6.0.36.nupkg.sha512",
-    "C:\\Users\\Owner\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.36\\microsoft.windowsdesktop.app.ref.6.0.36.nupkg.sha512",
-    "C:\\Users\\Owner\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.36\\microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512"
+    "C:\\Users\\Owner\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.36\\microsoft.netcore.app.runtime.mono.browser-wasm.6.0.36.nupkg.sha512"
   ],
   "logs": []
 }
